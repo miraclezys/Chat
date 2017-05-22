@@ -1,41 +1,35 @@
-
 var http = require('http');
-
 var fs = require('fs');
 
-var server = http.createServer((request, response) => {
-	fs.readFile('./index.html', (error, data) => {
-		if(error) throw error;
-		response.writeHead(200, {'Content-Type':'text/html'});
-		response.write(data);
-		response.end();
+function handleGet(req, res) {
+	let url = req.url === '/' ? "./public/index.html" : "./public" + req.url;
+	let type = req.headers.accept.split(",");
+	
+	fs.readFile(url, (error, data) => {
+		if(error) {
+			res.writeHead(404, {'Content-Type':'text/plain'});
+			res.end();
+		}
+		res.writeHead(200, {'Content-Type':type[0]});
+		res.write(data);
+		res.end();
 	})
+}
+
+var server = http.createServer((req, res) => {
+	if (req.method.toLowerCase() === 'get') {
+		handleGet(req, res);	
+	}
 }).listen(8888);
 
 var io = require('socket.io').listen(server);
 
+var numUsers = 0;
+
 io.on('connection', function(socket) {
-	console.log("a user connected");
-	socket.on('chat message', function(msg) {
-		console.log(msg);
-		io.emit('chat message', msg);
+	numUsers++;
+	console.log(numUsers);
+	socket.on('disconnect', function() {
+		numUsers--;
 	})
 })
-
-/*
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
-
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
-*/
