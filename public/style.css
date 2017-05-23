@@ -69,6 +69,7 @@ html, body {
 .chat-area {
 	width: 80%;
 	height: 100%;
+	padding-bottom: -60px;
 	background-color: #fff;
 	position: absolute;
 	top: 0;
@@ -82,12 +83,42 @@ html, body {
 
 .input-message {
 	width: 90%;
-	height: 50px;
+	height: 60px;
 	padding: 5px;
+	font-size: 100%;
 	outline: none;
-	border: 5px solid #18c5a3;
+	border: 8px solid #18c5a3;
 	box-sizing: border-box;
 	position: absolute;
 	bottom: 0;
 	left: 5%;
+}
+
+ul {
+	list-style-type: none;	
+}
+
+.messages {
+	height: 100%;
+	margin: 0;
+	padding: 10px;
+	overflow-y: scroll;
+	font-size: 150%;
+}
+
+.log {
+	margin: 5px;
+	color: gray;
+  	font-size: 70%;
+	text-align: center;
+}
+
+.username {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.message {
+	margin: 5px;
+	font-size: 90%;
 }
