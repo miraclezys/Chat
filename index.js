@@ -47,8 +47,18 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('add message', {
 			message: data.message,
 			color: data.color
-		})
-	})
+		});
+	});
+
+	socket.on('is typing', () => {
+		socket.broadcast.emit('is typing', {
+			username: socket.username
+		});
+	});
+
+	socket.on('stop typing', () => {
+		socket.broadcast.emit('stop typing', socket.username);
+	});
 
 	socket.on('disconnect', () => {
 		if(addedUser) numUsers--;
