@@ -35,8 +35,6 @@ html, body {
 	overflow: hidden;
 }
 
-
-
 .login-form {
 	width: 100%;
 	height: 100px;
@@ -101,7 +99,7 @@ ul {
 .messages {
 	height: 100%;
 	margin: 0;
-	padding: 10px;
+	padding: 5%;
 	overflow-y: scroll;
 	font-size: 150%;
 }
@@ -119,6 +117,22 @@ ul {
 }
 
 .message {
+	width: 100%;
 	margin: 5px;
 	font-size: 90%;
+}
+
+.message > span {
+	word-break: break-all;
+}
+
+.typing {
+	color: gray;
+	font-size: 90%;
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+
+.delete {
+	opacity: 0;
 }
