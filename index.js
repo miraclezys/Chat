@@ -4,7 +4,7 @@ var fs = require('fs');
 function handleGet(req, res) {
 	let url = req.url === '/' ? "./public/index.html" : "./public" + req.url;
 	let type = req.headers.accept.split(",");
-	//console.log(url);
+	// console.log(type);
 	fs.readFile(url, (error, data) => {
 		if(!error) {
 			res.writeHead(200, {'Content-Type':type[0]});
@@ -23,6 +23,8 @@ var server = http.createServer((req, res) => {
 		handleGet(req, res);	
 	}
 }).listen(8888);
+
+console.log("Please open http://localhost:8888");
 
 var io = require('socket.io').listen(server);
 
